@@ -26,7 +26,7 @@ func Sqrt(x float64) (float64, error) {
 	}
 }
 
-func main() {
-	fmt.Println(Sqrt(2))
-	fmt.Println(Sqrt(-2))
-}
+//func main() {
+//	fmt.Println(Sqrt(2))
+//	fmt.Println(Sqrt(-2))
+//}
