@@ -1,19 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
 )
 
-func mockWebsiteChecker(url string) bool {
-	if url == "waat://furhurtterwe.geds" {
-		return false
-	}
-	return true
-}
-
 func TestCheckWebsites(t *testing.T) {
+	mockWebsiteChecker := func (url string) bool {
+		fmt.Println("url: -----        ", url)
+		if url == "waat://furhurtterwe.geds" {
+			return false
+		}
+		return true
+	}
+
 	websites := []string{
 		"http://google.com",
 		"http://blog.bab.com",
@@ -26,11 +28,13 @@ func TestCheckWebsites(t *testing.T) {
 		"waat://furhurtterwe.geds": false,
 	}
 
-	got := CheckWebsites(mockWebsiteChecker, websites)
-
-	if !reflect.DeepEqual(want, got) {
-		t.Fatalf("Wanted %v, got %v", want, got)
-	}
+	t.Run("test label", func(t *testing.T) {
+		got := CheckWebsites(mockWebsiteChecker, websites)
+		fmt.Println("got -------", got)
+		if !reflect.DeepEqual(want, got) {
+			t.Errorf("Wanted %v, got %v", want, got)
+		}
+	})
 }
 
 func slowStubWebsiteChecker(_ string) bool {
