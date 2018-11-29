@@ -1,25 +1,34 @@
 package main
 
-import "time"
+import (
+	"fmt"
+)
 
-type WebsiteChecker func(string) bool
+type result struct {
+	int
+	string
+}
 
-func CheckWebsites(wc WebsiteChecker, urls []string) map[string]string  {
-	results := make(map[string]string)
+func main() {
+	results := make(map[int]string, 3)
+	resultChannel := make(chan result)
 
-	urls2 := []string{
+	urls := []string{
 		"http://google.com",
 		"http://blog.bab.com",
 		"waat://furhurtterwe.geds",
 	}
 
-	for _, url := range urls2 {
-		go func() {
-			results[url] = url
-		}()
+	for i, url := range urls {
+		go func(i int, u string) {
+			resultChannel <- result{i, u}
+		}(i, url)
 	}
 
-	time.Sleep(2 * time.Second)
+	for i := 0; i < len(urls); i++ {
+		result := <- resultChannel
+		results[result.int] = result.string
+	}
 
-	return results
+	fmt.Print(results)
 }
