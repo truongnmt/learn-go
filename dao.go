@@ -26,15 +26,15 @@ func assignPointer(z *S) {
 	fmt.Println("-------- After assignPointer --------")
 }
 
-func main() {
-	fmt.Println("-------- Begin main --------")
-	z := &S{name: "im z"}
-	d := &S{name: "im d"}
-
-	fmt.Println("z before ------ ", &z, z)
-	assignPointer(z)
-	fmt.Println("z after assignPointer ------ ", &z, z)
-	z.toD(d)
-	fmt.Println("z after toD ------ ", &z, z)
-	fmt.Println("-------- After main --------")
-}
+//func main() {
+//	fmt.Println("-------- Begin main --------")
+//	z := &S{name: "im z"}
+//	d := &S{name: "im d"}
+//
+//	fmt.Println("z before ------ ", &z, z)
+//	assignPointer(z)
+//	fmt.Println("z after assignPointer ------ ", &z, z)
+//	z.toD(d)
+//	fmt.Println("z after toD ------ ", &z, z)
+//	fmt.Println("-------- After main --------")
+//}
